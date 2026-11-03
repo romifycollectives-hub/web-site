@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Romify Collectives</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Romify Collectives, Kochi: group trips, custom holidays, bike rides, treks, solo trips and corporate offsites. Find your true north.">
+<meta name="theme-color" content="#DAD7CD">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: the logo's world — sand ground, a sunset that does the selling, pine-dark bands for depth.
+   One brand look on purpose (light sand), so every colour is set explicitly. */
+:root{
+  color-scheme:light;
+  --sand:#DAD7CD;      /* logo background */
+  --paper:#F3F1EB;     /* lighter sand for surfaces */
+  --slate:#3A5C6C;     /* ROMIFY wordmark */
+  --pine:#2A484D;      /* trees */
+  --ink:#24363E;       /* body text, a darker slate for reading */
+  --muted:#5D6F73;
+  --sunset:#FD9A5C;
+  --coral:#F46E64;
+  --gold:#FFB057;
+  --teal:#6F9C99;
+  --teal-deep:#3F716E; /* teal dark enough for small text on sand */
+  --taupe:#B7A68A;
+  --mustard:#CDBA6B;
+  --line:#C6BFAE;
+  --on-dark:#EEEBE2;
+  --font-display:"Montserrat", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body:"DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius:16px;
+  --max:1200px;
+  --sun-grad:linear-gradient(135deg,var(--gold),var(--sunset) 45%,var(--coral));
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.015em;color:var(--slate)}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.section{padding-block:clamp(64px,8vw,104px)}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-deep)}
+.section-head{display:grid;gap:14px;max-width:60ch;margin-bottom:clamp(28px,4vw,44px)}
+.section-head h2{font-size:clamp(2rem,4.2vw,3.1rem);font-weight:800}
+.section-head p{color:var(--muted);font-size:1.07rem}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 .95rem/1 var(--font-body);padding:15px 22px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-sun{background:var(--sun-grad);color:#2B1708;box-shadow:0 10px 24px -12px rgba(244,110,100,.8)}
+.btn-line{border-color:var(--slate);color:var(--slate);background:transparent}
+.btn svg{width:18px;height:18px}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.brand b{font-family:var(--font-display);font-weight:600;font-size:1.25rem;letter-spacing:.32em;color:var(--slate);display:block;line-height:1}
+.brand small{display:block;font-family:var(--font-display);font-weight:700;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep);margin-top:5px}
+.nav{display:flex;gap:24px;align-items:center}
+.nav a{text-decoration:none;font-weight:600;font-size:.93rem;color:var(--muted)}
+.nav a:hover{color:var(--slate)}
+.nav .btn{padding:11px 18px;font-size:.88rem;color:#2B1708}
+.menu-btn{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;width:44px;height:44px;color:var(--slate);cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:grid;place-items:center}
+  .nav{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .nav.open{display:flex}
+  .nav a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .nav .btn{margin-top:12px;border-bottom:0}
+}
+
+/* Hero banner: full-width scene, text on a soft dark scrim so it always reads */
+.banner{position:relative;overflow:hidden;min-height:clamp(540px,82vh,760px);display:flex;align-items:flex-end;background:linear-gradient(180deg,#2B3550 0%,#8A6A7A 38%,#F2A86A 62%,#5E7F6E 80%,#1F3A33 100%);color:#fff}
+.banner-media{position:absolute;inset:0}
+.banner-media canvas,.banner-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.banner-media img{object-position:62% 55%}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,26,30,.72) 0%,rgba(14,26,30,.45) 45%,rgba(14,26,30,0) 75%),linear-gradient(0deg,rgba(14,26,30,.65) 0%,rgba(14,26,30,0) 45%);pointer-events:none}
+.banner .wrap{position:relative;z-index:1;width:100%;padding-block:clamp(56px,8vw,96px) clamp(40px,6vw,72px)}
+.banner-copy{max-width:640px}
+.banner .eyebrow{color:var(--gold);text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.banner h1{font-size:clamp(2.8rem,7vw,5.6rem);font-weight:800;margin:16px 0 18px;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.banner h1 em{font-style:normal;color:var(--gold)}
+.banner-copy>p{font-size:clamp(1.05rem,1.6vw,1.2rem);color:rgba(255,255,255,.92);max-width:46ch;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn-glass{border-color:rgba(255,255,255,.85);color:#fff;background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.btn-glass:hover{background:rgba(255,255,255,.18)}
+.banner-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:clamp(32px,5vw,56px);padding-top:18px;border-top:1px solid rgba(255,255,255,.22)}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick button{font:600 .85rem var(--font-body);color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(6px)}
+.quick button:hover{background:rgba(255,255,255,.22)}
+.coords{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.74rem;color:rgba(255,255,255,.85);letter-spacing:.04em}
+.coords svg{width:28px;height:28px;flex-shrink:0}
+@media (max-width:640px){.banner-media img{object-position:80% 40%}.banner::after{background:linear-gradient(0deg,rgba(14,26,30,.82) 0%,rgba(14,26,30,.55) 55%,rgba(14,26,30,.15) 100%)}}
+
+/* Trip types */
+.types{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.type{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px 20px;display:flex;flex-direction:column;gap:10px;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:transform .2s ease,border-color .2s ease}
+.type:hover{transform:translateY(-3px);border-color:var(--sunset)}
+.type .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--sand);color:var(--pine)}
+.type .ic svg{width:26px;height:26px}
+.type h3{font-size:1.08rem;font-weight:700}
+.type p{font-size:.92rem;color:var(--muted)}
+.type .go{margin-top:auto;font-weight:700;font-size:.85rem;color:var(--coral);display:flex;align-items:center;gap:6px}
+@media (max-width:1040px){.types{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.types{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:400px){.types{grid-template-columns:1fr}}
+
+/* Trip slider */
+.trips-sec{background:var(--paper);border-block:1px solid var(--line)}
+.trip-bar{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{font:600 .88rem var(--font-body);padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;display:flex;gap:6px;align-items:center}
+.tabs button span{font-family:var(--font-mono);font-size:.7rem;opacity:.8}
+.tabs button[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:var(--on-dark)}
+.sort{display:flex;align-items:center;gap:8px;white-space:nowrap;font-weight:600;font-size:.88rem;color:var(--muted)}
+.sort select{font:600 .9rem var(--font-body);color:var(--slate);background:var(--sand);border:1.5px solid var(--line);border-radius:999px;padding:9px 34px 9px 14px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233A5C6C' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+.slider{position:relative}
+.track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 18px;scrollbar-width:none;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.ticket{flex:0 0 clamp(262px,28vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;background:#FFFDF8;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);transition:transform .25s ease, box-shadow .25s ease;animation:slideIn .55s cubic-bezier(.2,.7,.2,1) both}
+.ticket:hover{transform:translateY(-4px);box-shadow:0 22px 40px -26px rgba(42,72,77,.55)}
+@keyframes slideIn{from{transform:translateX(36px)}to{transform:none}}
+.ticket-art{position:relative;aspect-ratio:16/10;max-width:100%}
+.ticket-art svg{display:block;width:100%;height:100%}
+.badge{position:absolute;top:12px;left:12px;font-family:var(--font-display);font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--mustard);color:#2B2410;padding:6px 9px;border-radius:6px}
+.badge.alt{left:auto;right:12px;background:rgba(36,54,62,.78);color:#fff}
+.perf{position:relative;height:0;border-top:2px dashed var(--line);margin:0 14px}
+.perf::before,.perf::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1px solid var(--line)}
+.perf::before{left:-25px}.perf::after{right:-25px}
+.ticket-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.route{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.route b{color:var(--slate);font-size:.95rem;letter-spacing:.06em}
+.route i{flex:1;border-top:1.5px dotted var(--taupe)}
+.ticket h3{font-size:1.1rem;font-weight:700}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fields b{display:block;font-family:var(--font-body);font-size:.88rem;font-weight:600;color:var(--ink);letter-spacing:0;text-transform:none;margin-top:2px}
+.ticket-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--line)}
+.price{font-family:var(--font-display);font-weight:800;font-size:1.15rem;color:var(--slate);font-variant-numeric:tabular-nums}
+.price small{display:block;font-family:var(--font-body);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ticket-foot button{font:700 .84rem var(--font-body);background:var(--pine);color:var(--on-dark);border:0;padding:10px 15px;border-radius:999px;cursor:pointer}
+.ticket-foot button:hover{background:var(--coral);color:#2B1708}
+.slide-ctrl{display:flex;align-items:center;gap:16px;margin-top:6px}
+.progress{flex:1;height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.progress i{display:block;height:100%;width:20%;background:var(--sun-grad);border-radius:4px;transition:width .3s ease}
+.arrows{display:flex;gap:8px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--slate);background:transparent;color:var(--slate);cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{background:var(--slate);color:var(--paper)}
+.arrows button:disabled{opacity:.35;cursor:default;background:transparent;color:var(--slate)}
+.play{font:600 .8rem var(--font-body);background:none;border:0;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 0}
+.empty{padding:40px 0;color:var(--muted)}
+.fine{margin-top:16px;font-size:.84rem;color:var(--muted)}
+
+/* Why band */
+.band{background:var(--pine);color:var(--on-dark)}
+.band h2,.band h3{color:var(--on-dark)}
+.band .eyebrow{color:var(--gold)}
+.band .section-head p{color:color-mix(in srgb,var(--on-dark) 75%,transparent)}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:color-mix(in srgb,var(--on-dark) 16%,transparent);border-radius:var(--radius);overflow:hidden}
+.why div{background:var(--pine);padding:28px 26px;display:grid;gap:10px;align-content:start}
+.why svg{width:30px;height:30px;color:var(--gold)}
+.why h3{font-size:1.12rem;font-weight:700}
+.why p{color:color-mix(in srgb,var(--on-dark) 75%,transparent);font-size:.95rem}
+@media (max-width:860px){.why{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.why{grid-template-columns:1fr}}
+
+/* Corporate offsites */
+.offsite{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:center}
+.offsite-art{border-radius:22px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.offsite-art svg{display:block;width:100%;height:100%}
+.offsite ul{list-style:none;padding:0;margin:22px 0 28px;display:grid;gap:12px}
+.offsite li{display:flex;gap:12px;align-items:flex-start}
+.offsite li::before{content:"";flex:0 0 10px;height:10px;margin-top:8px;background:var(--sunset);clip-path:polygon(50% 0,100% 100%,0 100%)}
+@media (max-width:860px){.offsite{grid-template-columns:1fr}}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;display:grid;gap:8px;align-content:start}
+.steps li::before{counter-increment:s;content:"0" counter(s);font-family:var(--font-display);font-weight:800;font-size:2.6rem;line-height:1;background:var(--sun-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.steps h3{font-size:1.18rem;font-weight:700}
+.steps p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* Insta */
+.insta{background:var(--sun-grad)}
+.insta .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:44px}
+.insta h2{font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:800;color:#2B1708;max-width:24ch}
+.insta .btn{background:var(--pine);color:var(--on-dark)}
+
+/* Enquiry */
+.enquire .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,56px);align-items:start}
+@media (max-width:900px){.enquire .wrap{grid-template-columns:1fr}}
+.contact-list{display:grid;gap:12px;margin-top:26px}
+.contact-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.contact-row>div{min-width:0}
+.contact-row small{display:block;font-family:var(--font-display);font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep)}
+.contact-row strong,.contact-row a{font-weight:600;text-decoration:none;word-break:break-all;color:var(--slate)}
+.copy{font:600 .8rem var(--font-body);border:1.5px solid var(--line);background:transparent;color:var(--slate);border-radius:999px;padding:8px 12px;cursor:pointer;flex-shrink:0}
+form{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:.85rem;font-weight:700;color:var(--slate)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:#FFFDF8;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;width:100%}
+textarea{min-height:92px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
+.err{grid-column:1/-1;color:#B23B32;font-size:.86rem;font-weight:600}
+.form-out{grid-column:1/-1;display:grid;gap:12px;background:var(--sand);border-radius:12px;padding:16px}
+.form-out pre{margin:0;white-space:pre-wrap;font-family:var(--font-mono);font-size:.78rem;color:var(--ink)}
+.btn-wa{background:#1FA855;color:#fff}
+@media (max-width:560px){form{grid-template-columns:1fr}}
+
+/* Footer */
+footer{background:var(--pine);color:var(--on-dark);padding-block:56px 28px}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:32px}
+.foot-logo{background:var(--sand);border-radius:16px;padding:14px;display:inline-block}
+.foot-logo img{width:150px;height:auto;display:block}
+.foot h4{font-family:var(--font-display);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px;font-weight:700}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.foot a{text-decoration:none;color:color-mix(in srgb,var(--on-dark) 80%,transparent)}
+.foot a:hover{color:#fff}
+.foot p{color:color-mix(in srgb,var(--on-dark) 72%,transparent);max-width:32ch;margin-top:14px;font-size:.95rem}
+.legal{margin-top:44px;padding-top:20px;border-top:1px solid color-mix(in srgb,var(--on-dark) 16%,transparent);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.84rem;color:color-mix(in srgb,var(--on-dark) 62%,transparent)}
+@media (max-width:860px){.foot{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot{grid-template-columns:1fr}}
+
+.wa{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:10px;background:#1FA855;color:#fff;text-decoration:none;font-weight:700;padding:13px 18px 13px 14px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,.45)}
+.wa svg{width:24px;height:24px}
+@media (max-width:520px){.wa span{display:none}.wa{padding:14px}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Romify Collectives home">
+      <img src="assets/mark.webp" alt="" width="47" height="40">
+      <span><b>ROMIFY</b><small>Collectives.</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#ways">Ways to travel</a>
+      <a href="#trips">Trips</a>
+      <a href="#offsites">Corporate offsites</a>
+      <a href="#why">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-sun" href="#contact">Plan my trip</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <section class="banner" aria-label="Find your true north">
+    <div class="banner-media" id="bannerMedia">
+      <canvas id="sceneCanvas" aria-hidden="true"></canvas>
+      <img id="heroPhoto" src="assets/hero.jpg" alt="Misty tea hills of the Western Ghats at sunrise" onerror="this.remove()">
+    </div>
+    <div class="wrap">
+      <div class="banner-copy">
+        <span class="eyebrow">Romify Collectives · Travel from Kerala</span>
+        <h1>Find your <em>true north.</em></h1>
+        <p>Group trips, bike rides, treks and solo adventures that start in Kerala and go wherever the road gets interesting. Want it your way? We build custom holidays too.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-sun" href="#trips">See upcoming trips
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-glass" href="#contact">Plan a custom holiday</a>
+        </div>
+      </div>
+      <div class="banner-foot">
+        <div class="quick" aria-label="Jump to a trip type">
+          <button type="button" data-jump="group">Group trips</button>
+          <button type="button" data-jump="custom">Custom holidays</button>
+          <button type="button" data-jump="bike">Bike rides</button>
+          <button type="button" data-jump="trek">Trekking</button>
+          <button type="button" data-jump="solo">Solo trips</button>
+        </div>
+        <div class="coords">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="1.5" opacity=".85"/><path d="M16 4l4 12h-8z" fill="#FD9A5C"/><path d="M16 28l-4-12h8z" fill="#DAD7CD"/></svg>
+          <span>Base camp: Kochi, Kerala · 9.93° N, 76.26° E</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ways">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Five ways to travel with us</span>
+        <h2>Pick your kind of trip</h2>
+      </div>
+      <div class="types">
+        <button class="type" type="button" data-jump="group">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c.8-3.2 3.2-5 6-5s5.2 1.8 6 5M10 20c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/></svg></span>
+          <h3>Group trips</h3><p>Fixed dates, small groups, a trip lead and new friends.</p><span class="go">See trips →</span></button>
+        <button class="type" type="button" data-jump="custom">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg></span>
+          <h3>Custom holidays</h3><p>Your dates, your people, your budget. Family, couples or friends.</p><span class="go">See ideas →</span></button>
+        <button class="type" type="button" data-jump="bike">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"/><circle cx="18.5" cy="16.5" r="3.5"/><path d="M5.5 16.5 9 9h5l4.5 7.5M9 9 7.5 6H5M14 9l1.5-3H18"/></svg></span>
+          <h3>Bike rides</h3><p>Ghats, coffee country and high passes, with backup and a mechanic.</p><span class="go">See rides →</span></button>
+        <button class="type" type="button" data-jump="trek">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20 9 7l4 7 3-4 6 10z"/><path d="M9 7l1.5 2.5"/></svg></span>
+          <h3>Trekking</h3><p>Western Ghats weekends to Himalayan winter summits, with certified guides.</p><span class="go">See treks →</span></button>
+        <button class="type" type="button" data-jump="solo">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v6l-3 7M12 14l3 7M8 11h8"/></svg></span>
+          <h3>Solo trips</h3><p>Travel alone, never lonely. Safe stays and a crew waiting for you.</p><span class="go">See solo trips →</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section trips-sec" id="trips">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Upcoming departures</span>
+        <h2>Trips worth packing for</h2>
+        <p>Swipe through what's coming up. Filter by kind of trip, then sort by price or by the next departure date.</p>
+      </div>
+      <div class="trip-bar">
+        <div class="tabs" role="group" aria-label="Trip type" id="tabs"></div>
+        <label class="sort" for="sortBy">Sort by
+          <select id="sortBy">
+            <option value="rec">Recommended</option>
+            <option value="price">Price: low to high</option>
+            <option value="date">Next departure</option>
+          </select>
+        </label>
+      </div>
+      <div class="slider">
+        <div class="track" id="track" tabindex="0" aria-label="Trips, scroll sideways" aria-live="polite"></div>
+      </div>
+      <div class="slide-ctrl">
+        <button class="play" type="button" id="play" aria-pressed="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="3.5" height="10" rx="1" fill="currentColor"/><rect x="8.5" y="2" width="3.5" height="10" rx="1" fill="currentColor"/></svg><span>Pause</span></button>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+        <div class="arrows">
+          <button type="button" id="prev" aria-label="Previous trips"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M12 4 6 10l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" id="next" aria-label="Next trips"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="m8 4 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <p class="fine">Prices are per person on twin or triple sharing, starting from Kochi. Final price and itinerary come with your quote.</p>
+    </div>
+  </section>
+
+  <section class="section band" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why travel with Romify</span>
+        <h2>Less sightseeing checklist. More story to tell.</h2>
+        <p>We're a Kochi crew of riders, trekkers and slow travellers. We plan trips we'd go on ourselves, then bring good people along.</p>
+      </div>
+      <div class="why">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c1-3 3-4 5-4s4 1 5 4M11 19c1-3 3-4 5-4s4 1 5 4"/></svg><h3>Small groups</h3><p>8 to 16 travellers, so everyone fits around one campfire.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><h3>Off the usual route</h3><p>A valley further, a village quieter, a trail most buses skip.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7v6c0 4.5 3.4 7.6 8 8 4.6-.4 8-3.5 8-8V7z"/><path d="m9 12 2 2 4-4"/></svg><h3>Safety first</h3><p>Trained trip leads, first-aid kits, backup vehicles on rides, and solo-friendly stays.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><h3>Local hosts</h3><p>Homestays and camps run by people who know every shortcut.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12c3-6 6-6 9 0s6 6 9 0"/></svg><h3>Flexible plans</h3><p>Weather turns or the group wants another sunrise? We adjust.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg><h3>All sorted</h3><p>Tickets, stays, permits and transfers booked before you leave.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="offsites">
+    <div class="wrap offsite">
+      <div>
+        <span class="eyebrow">Corporate offsites</span>
+        <h2 style="font-size:clamp(2rem,4.2vw,3rem);font-weight:800;margin-top:14px">Take the team somewhere that sparks good ideas</h2>
+        <p style="margin-top:16px;color:var(--muted);font-size:1.07rem;max-width:52ch">Two-to-four-day offsites in the hills, by the backwaters or on the coast. You set the goals, we handle the rest.</p>
+        <ul>
+          <li>Stays with meeting space, Wi-Fi and backup power in Munnar, Wayanad, Coorg and Vagamon</li>
+          <li>Team treks, rides, kayaking and campfire sessions</li>
+          <li>Travel from Kochi, Bangalore or any office, for 10 to 150 people</li>
+          <li>One coordinator from first call to the last airport drop</li>
+        </ul>
+        <a class="btn btn-sun" href="#contact" data-type="Corporate offsite">Plan an offsite</a>
+      </div>
+      <div class="offsite-art" id="offsiteArt"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From message to mountain in three steps</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Say hello</h3><p>Pick a trip or share your idea, dates and group size. WhatsApp is quickest.</p></li>
+        <li><h3>Get your plan</h3><p>We send a day-by-day itinerary with stays, transport and a clear price.</p></li>
+        <li><h3>Pack and go</h3><p>Pay a deposit to confirm. We book everything and stay with you till you're home.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="insta">
+    <div class="wrap">
+      <h2>Follow the crew on the road.</h2>
+      <a class="btn" href="https://www.instagram.com/romify.collectives" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @romify.collectives</a>
+    </div>
+  </section>
+
+  <section class="section enquire" id="contact">
+    <div class="wrap">
+      <div>
+        <div class="section-head" style="margin-bottom:0">
+          <span class="eyebrow">Plan with us</span>
+          <h2>Where do you want to go?</h2>
+          <p>Fill in a few details and send them to us on WhatsApp. We reply within a few hours.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-row"><div><small>Call or WhatsApp</small><strong>+91 96561 39659</strong></div><button class="copy" type="button" data-copy="+91 9656139659">Copy</button></div>
+          <div class="contact-row"><div><small>Email</small><strong>romifycollectives@gmail.com</strong></div><button class="copy" type="button" data-copy="romifycollectives@gmail.com">Copy</button></div>
+          <div class="contact-row"><div><small>Instagram</small><a href="https://www.instagram.com/romify.collectives" target="_blank" rel="noopener">@romify.collectives</a></div></div>
+        </div>
+      </div>
+      <form id="enquiry" novalidate>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" placeholder="Your full name"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" autocomplete="tel" placeholder="+91"></div>
+        <div class="field"><label for="f-type">Trip type</label>
+          <select id="f-type"><option>Group trip</option><option>Custom holiday</option><option>Bike ride</option><option>Trekking</option><option>Solo trip</option><option>Corporate offsite</option></select></div>
+        <div class="field"><label for="f-dest">Trip</label><select id="f-dest"><option value="">Not sure yet</option></select></div>
+        <div class="field"><label for="f-when">When</label><input id="f-when" placeholder="e.g. late December"></div>
+        <div class="field"><label for="f-size">Travellers</label><input id="f-size" type="number" min="1" value="2"></div>
+        <div class="field full"><label for="f-msg">Anything else?</label><textarea id="f-msg" placeholder="Budget, starting city, own bike or rental…"></textarea></div>
+        <p class="err" id="f-err" hidden>Add your name and phone number so we can reply.</p>
+        <div class="field full"><button class="btn btn-sun" type="submit">Prepare my WhatsApp message</button></div>
+        <div class="form-out" id="f-out" hidden>
+          <pre id="f-text"></pre>
+          <a class="btn btn-wa" id="f-wa" href="https://wa.me/919656139659" target="_blank" rel="noopener">Send on WhatsApp</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="foot-logo"><img src="assets/logo-full.webp" alt="Romify, find your true north" width="150" height="132"></span>
+        <p>Group trips, custom holidays, bike rides, treks and solo trips from Kochi, Kerala.</p>
+      </div>
+      <div><h4>Travel</h4><ul><li><a href="#trips" data-jump-link="group">Group trips</a></li><li><a href="#trips" data-jump-link="custom">Custom holidays</a></li><li><a href="#trips" data-jump-link="bike">Bike rides</a></li><li><a href="#trips" data-jump-link="trek">Trekking</a></li><li><a href="#trips" data-jump-link="solo">Solo trips</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#offsites">Corporate offsites</a></li><li><a href="#why">About us</a></li><li><a href="#contact">Partner with us</a></li><li><a href="#contact">FAQ</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="https://wa.me/919656139659" target="_blank" rel="noopener">+91 96561 39659</a></li><li><span style="opacity:.85">romifycollectives@gmail.com</span></li><li><a href="https://www.instagram.com/romify.collectives" target="_blank" rel="noopener">Instagram</a></li><li><span style="opacity:.85">Kochi, Kerala, India</span></li></ul></div>
+    </div>
+    <div class="legal"><span>© <span id="yr">2026</span> Romify Collectives LLP. All rights reserved.</span><span>Privacy policy · Terms &amp; cancellations</span></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/919656139659?text=Hi%20Romify!%20I'd%20like%20to%20plan%20a%20trip." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+  <span>WhatsApp us</span>
+</a>
+
+<script>
+(function(){
+  const WA = "919656139659";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ===== Brand illustrations (sunset palette from the logo) ===== */
+  const rng = seed => { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; };
+  let uid = 0;
+  function art(kind, seed){
+    const W = 500, H = 300, r = rng(seed), id = "s" + (uid++);
+    const SKY = {
+      peaks:["#FFB057","#F6DCC0"], trek:["#FFC27A","#F3E2CB"], ride:["#FD9A5C","#F8D9B8"], hills:["#A8CAC5","#EFEEE4"],
+      coast:["#FFB057","#F7E0C6"], backwater:["#9CC6BC","#EFEFE4"], boulders:["#FD9A5C","#F6D7B6"], island:["#F46E64","#FBCB9C"], offsite:["#FFB057","#F3E0C8"]
+    }[kind];
+    let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SKY[0]}"/><stop offset="1" stop-color="${SKY[1]}"/></linearGradient><linearGradient id="${id}u" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB057"/><stop offset="1" stop-color="#F46E64"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#${id})"/>`;
+    const sx = 300 + r()*120, sy = 82 + r()*26;
+    s += `<circle cx="${sx}" cy="${sy}" r="${kind==='island'||kind==='boulders'?52:40}" fill="url(#${id}u)" opacity=".95"/>`;
+    const range = (base, amp, step, fill, snow) => {
+      let pts = `0,${H} `, x = -30, tops = [];
+      while(x < W + 60){ const t = base - amp*.35 - r()*amp; pts += `${x},${base+18} ${x+step/2},${t} `; tops.push([x+step/2,t]); x += step; }
+      let out = `<polygon points="${pts}${W},${H}" fill="${fill}"/>`;
+      if(snow) tops.forEach(([px,t]) => { const w = step*.16, h = step*.3; out += `<polygon points="${px-w},${t+h} ${px},${t} ${px+w},${t+h} ${px+w*.3},${t+h*.75} ${px-w*.2},${t+h*.9}" fill="#FBF7EE"/>`; });
+      return out;
+    };
+    const roll = (y, fill, a=55) => `<path d="M0 ${y} Q ${90+r()*90} ${y-a-r()*25} ${240+r()*30} ${y-8} T ${W} ${y-16+r()*16} L${W} ${H} L0 ${H} Z" fill="${fill}"/>`;
+    const tree = (x, y, h) => `<path d="M${x} ${y-h} L${x+h*.32} ${y-h*.35} L${x+h*.18} ${y-h*.35} L${x+h*.38} ${y} L${x-h*.38} ${y} L${x-h*.18} ${y-h*.35} L${x-h*.32} ${y-h*.35} Z" fill="#2A484D"/>`;
+    const water = (y, c) => { let w = `<rect x="0" y="${y}" width="${W}" height="${H-y}" fill="${c}"/>`; for(let i=0;i<6;i++) w += `<rect x="${r()*400}" y="${y+10+i*11}" width="${40+r()*70}" height="2" rx="1" fill="#fff" opacity=".4"/>`; return w; };
+    if(kind==="peaks"||kind==="trek"){
+      s += range(150, 95, 120, "#C9BBA0", true) + range(195, 70, 95, "#B7A68A") + range(240, 40, 80, "#6F9C99");
+      s += `<path d="M0 ${H-28} Q 160 ${H-58} 280 ${H-36} T 500 ${H-44} L500 ${H} L0 ${H} Z" fill="#2A484D"/>`;
+      if(kind==="trek"){
+        s += `<path d="M70 ${H} C 140 ${H-50}, 200 ${H-60}, 250 ${H-110} S 330 ${H-160} 360 ${H-175}" stroke="#FBF7EE" stroke-width="2.5" stroke-dasharray="5 7" fill="none"/>`;
+        s += `<polygon points="360,${H-170} 378,${H-140} 342,${H-140}" fill="#FD9A5C"/><polygon points="360,${H-162} 368,${H-140} 352,${H-140}" fill="#6F9C99"/>`;
+      }
+      s += tree(40,H-10,46) + tree(70,H-14,34) + tree(462,H-12,50);
+    } else if(kind==="ride"){
+      s += roll(165,"#B7A68A",50) + roll(205,"#8FB59A",40) + roll(245,"#5F8F75",30);
+      s += `<path d="M-10 ${H} C 120 ${H-60}, 300 ${H-30}, 300 ${H-80} S 220 ${H-120}, 330 ${H-140} S 470 ${H-150} 520 ${H-170}" stroke="#3A5C6C" stroke-width="16" fill="none" stroke-linecap="round"/>`;
+      s += `<path d="M-10 ${H} C 120 ${H-60}, 300 ${H-30}, 300 ${H-80} S 220 ${H-120}, 330 ${H-140} S 470 ${H-150} 520 ${H-170}" stroke="#F3E3C8" stroke-width="1.6" stroke-dasharray="8 8" fill="none"/>`;
+      s += tree(60,H-30,40) + tree(430,H-40,44);
+    } else if(kind==="hills"){
+      s += roll(150,"#B9CBBF",45) + `<rect y="160" width="${W}" height="22" fill="#fff" opacity=".35"/>` + roll(195,"#7FA88E",50) + `<rect y="205" width="${W}" height="20" fill="#fff" opacity=".3"/>` + roll(240,"#4D7F64",40);
+      for(let i=0;i<6;i++) s += `<path d="M0 ${252+i*9} Q 250 ${232+i*9} 500 ${248+i*9}" stroke="#3E6E55" stroke-width="2" fill="none" opacity=".7"/>`;
+      s += tree(440,H-50,46) + tree(470,H-46,34);
+    } else if(kind==="coast"||kind==="island"){
+      s += water(205, kind==="coast"?"#6F9C99":"#4F8C93");
+      if(kind==="coast") s += `<path d="M0 110 L110 104 L160 150 L200 205 L0 ${H} Z" fill="#B7A68A"/><path d="M0 150 L80 145 L120 205 L0 ${H} Z" fill="#9C8B70"/>`;
+      else s += `<path d="M170 210 C 210 140, 330 140, 380 210 Z" fill="#3E7B5A"/>`;
+      const px = kind==="coast"?320:290;
+      s += `<path d="M${px} 205 q 6 -42 -4 -74" stroke="#2A484D" stroke-width="3" fill="none"/><g fill="#2A484D"><path d="M${px-4} 131 q -26 -6 -36 10 q 20 -4 36 -10z M${px-4} 131 q 26 -8 38 6 q -20 -2 -38 -6z M${px-4} 131 q -10 -20 -30 -22 q 16 8 30 22z M${px-4} 131 q 14 -20 32 -18 q -18 6 -32 18z"/></g>`;
+    } else if(kind==="backwater"){
+      s += roll(165,"#9DBFA8",35) + roll(195,"#5F8F75",30) + water(212,"#5E9692");
+      s += `<path d="M150 238 Q 205 254 260 238 Z" fill="#3B2A1C"/><path d="M178 238 q 27 -22 54 0 z" fill="#B7A68A"/>`;
+    } else if(kind==="boulders"){
+      s += roll(190,"#D6B48A",30) + roll(230,"#B98D5E",25);
+      [[90,190,40],[140,175,30],[120,150,24],[360,200,46],[410,180,30],[385,150,22]].forEach(([x,y,rr]) => s += `<ellipse cx="${x}" cy="${y}" rx="${rr}" ry="${rr*.85}" fill="#9C7752"/>`);
+      s += `<g fill="#6B4A2E"><rect x="236" y="168" width="28" height="40"/><polygon points="230,170 250,140 270,170"/><rect x="222" y="200" width="56" height="10"/></g>`;
+    } else if(kind==="offsite"){
+      s += range(150, 80, 130, "#C9BBA0", true) + roll(205,"#7FA88E",45) + roll(245,"#4D7F64",30);
+      [[150,250],[205,246],[260,252]].forEach(([x,y],i) => s += `<polygon points="${x},${y-46} ${x+30},${y} ${x-30},${y}" fill="${i===1?'#FD9A5C':'#6F9C99'}"/><polygon points="${x},${y-22} ${x+12},${y} ${x-12},${y}" fill="#2A484D"/>`);
+      s += `<path d="M330 ${H-28} l12 -16 l12 16 z" fill="#F46E64"/><path d="M336 ${H-28} l6 -24 l6 24" stroke="#FFB057" stroke-width="3" fill="none"/>`;
+      s += tree(420,H-22,54) + tree(455,H-18,40) + tree(60,H-20,44);
+    }
+    return s + `</svg>`;
+  }
+
+  /* ===== Trips — PLACEHOLDER data. Replace names, prices and dates with real packages. =====
+     type: group | custom | bike | trek | solo   price: number in INR or null (on request)
+     date: next departure "YYYY-MM-DD" or null (your dates)   rank: order for "Recommended" */
+  const TRIPS = [
+    {name:"Munnar & Vattavada Weekend", type:"group", region:"Idukki, Kerala", from:"COK", to:"MNR", days:"3D / 2N", price:6999, date:"2026-11-27", art:"hills", seed:5, rank:1},
+    {name:"Kochi → Vagamon → Idukki Ride", type:"bike", region:"Kerala ghats", from:"COK", to:"VGM", days:"3D / 2N", price:7499, date:"2026-12-05", art:"ride", seed:12, rank:2},
+    {name:"Kedarkantha Winter Trek", type:"trek", region:"Uttarakhand", from:"COK", to:"KDK", days:"7D / 6N", price:16999, date:"2026-12-26", art:"trek", seed:9, rank:3},
+    {name:"Varkala Solo Slow Stay", type:"solo", region:"Thiruvananthapuram", from:"COK", to:"VKL", days:"4D / 3N", price:6999, date:"2026-12-04", art:"coast", seed:23, rank:4},
+    {name:"Kerala Family Holiday", type:"custom", region:"Munnar · Alleppey · Kochi", from:"YOU", to:"KER", days:"5–7 days", price:null, date:null, art:"backwater", seed:29, rank:5},
+    {name:"Winter Spiti Expedition", type:"group", region:"Himachal Pradesh", from:"COK", to:"SPT", days:"9D / 8N", price:24999, date:"2027-01-15", art:"peaks", seed:11, rank:6},
+    {name:"Chembra Peak & Wayanad", type:"trek", region:"Wayanad, Kerala", from:"COK", to:"WYD", days:"3D / 2N", price:5999, date:"2026-11-20", art:"hills", seed:17, rank:7},
+    {name:"Coorg & Chikmagalur Coffee Ride", type:"bike", region:"Karnataka", from:"COK", to:"CKM", days:"4D / 3N", price:11999, date:"2027-01-22", art:"ride", seed:31, rank:8},
+    {name:"Hampi Solo Backpacking", type:"solo", region:"Karnataka", from:"COK", to:"HMP", days:"4D / 3N", price:7999, date:"2027-01-08", art:"boulders", seed:3, rank:9},
+    {name:"Gokarna Beach Trek & Camp", type:"group", region:"Karnataka coast", from:"COK", to:"GOK", days:"4D / 3N", price:8499, date:"2026-12-11", art:"coast", seed:41, rank:10},
+    {name:"Kudremukh Trek", type:"trek", region:"Karnataka", from:"COK", to:"KDM", days:"3D / 2N", price:6499, date:"2026-12-18", art:"trek", seed:21, rank:11},
+    {name:"Ladakh Bike Expedition", type:"bike", region:"Ladakh", from:"COK", to:"IXL", days:"11D / 10N", price:42999, date:"2027-06-10", art:"peaks", seed:37, rank:12},
+    {name:"Bali Custom Escape", type:"custom", region:"Indonesia", from:"YOU", to:"DPS", days:"5–8 days", price:null, date:null, art:"island", seed:13, rank:13}
+  ];
+  const TYPES = [["all","All trips"],["group","Group trips"],["custom","Custom holidays"],["bike","Bike rides"],["trek","Trekking"],["solo","Solo trips"]];
+  const LABEL = {group:"Group trip", custom:"Custom holiday", bike:"Bike ride", trek:"Trekking", solo:"Solo trip"};
+  const inr = n => "₹" + n.toLocaleString("en-IN");
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const fmtDate = d => d ? `${Number(d.slice(8))} ${MON.at(Number(d.slice(5,7))-1)} ${d.slice(0,4)}` : "Your dates";
+  TRIPS.forEach(t => t.svg = art(t.art, t.seed));
+
+  /* ===== Banner scene: misty Western Ghats sunrise, painted on canvas.
+     Replaced automatically by a photo when one is present (img#heroPhoto). ===== */
+  (function(){
+    const cv = document.getElementById("sceneCanvas"); if(!cv) return;
+    const ctx = cv.getContext("2d");
+    function noise1(seed){ const r = rng(seed), pts = Array.from({length:65}, () => r());
+      return x => { const i = Math.floor(x), f = x - i, a = pts.at(i % 64), b = pts.at((i + 1) % 64), u = f*f*(3-2*f); return a + (b - a) * u; }; }
+    function fbm(n, x){ let v = 0, amp = .55, fr = 1; for(let o=0;o<5;o++){ v += amp * n(x*fr + o*7.3); amp *= .5; fr *= 2.1; } return v; }
+    function draw(){
+      const dpr = Math.min(devicePixelRatio || 1, 2), W = cv.clientWidth, H = cv.clientHeight;
+      if(!W || !H) return;
+      cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      const hz = H*.5, sunX = W*.68;
+      // sky
+      let g = ctx.createLinearGradient(0,0,0,hz+40);
+      g.addColorStop(0,"#25304A"); g.addColorStop(.35,"#6A5C78"); g.addColorStop(.62,"#D98C76"); g.addColorStop(.85,"#F7B36E"); g.addColorStop(1,"#FFD9A0");
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      // sun glow
+      g = ctx.createRadialGradient(sunX,hz,0,sunX,hz,W*.55);
+      g.addColorStop(0,"rgba(255,244,214,1)"); g.addColorStop(.05,"rgba(255,226,170,.95)"); g.addColorStop(.18,"rgba(255,180,110,.45)"); g.addColorStop(.5,"rgba(250,140,100,.12)"); g.addColorStop(1,"rgba(250,140,100,0)");
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      // thin clouds
+      const cr = rng(77);
+      for(let i=0;i<14;i++){ const y = H*(.12 + cr()*.28), x = cr()*W, w = W*(.15+cr()*.3), h = 6+cr()*14;
+        g = ctx.createRadialGradient(x,y,0,x,y,w/2); g.addColorStop(0,`rgba(255,${190+cr()*40|0},${160+cr()*40|0},${.16+cr()*.18})`); g.addColorStop(1,"rgba(255,200,170,0)");
+        ctx.save(); ctx.translate(x,y); ctx.scale(1,h/w*2); ctx.translate(-x,-y); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,w/2,0,7); ctx.fill(); ctx.restore(); }
+      // light rays
+      ctx.save(); ctx.globalCompositeOperation = "screen";
+      for(let i=0;i<9;i++){ const a = -Math.PI/2 - .9 + i*.22 + Math.sin(i*3.1)*.05;
+        g = ctx.createLinearGradient(sunX,hz,sunX+Math.cos(a)*H,hz+Math.sin(a)*H); g.addColorStop(0,"rgba(255,220,170,.10)"); g.addColorStop(1,"rgba(255,220,170,0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(sunX,hz); ctx.lineTo(sunX+Math.cos(a-.035)*H*1.4,hz+Math.sin(a-.035)*H*1.4); ctx.lineTo(sunX+Math.cos(a+.035)*H*1.4,hz+Math.sin(a+.035)*H*1.4); ctx.fill(); }
+      ctx.restore();
+      // ridges, far to near, with atmospheric haze and mist between
+      const layers = [
+        {y:.50, amp:.07, sc:2.2, top:"#B98F95", bot:"#C9A49A", seed:3},
+        {y:.55, amp:.09, sc:2.8, top:"#8E7B8E", bot:"#A99098", seed:5},
+        {y:.61, amp:.10, sc:3.2, top:"#64707F", bot:"#7E8590", seed:8},
+        {y:.68, amp:.11, sc:3.6, top:"#45605F", bot:"#56706B", seed:11},
+        {y:.77, amp:.10, sc:4.2, top:"#2F4E45", bot:"#3B5A4D", seed:14},
+        {y:.88, amp:.09, sc:5.0, top:"#1E3A30", bot:"#24432F", seed:19}
+      ];
+      layers.forEach((L,li) => {
+        const n = noise1(L.seed), base = H*L.y, pts = [];
+        for(let x=0;x<=W+8;x+=4){ const v = fbm(n, x/W*L.sc); pts.push([x, base - v*H*L.amp*1.6 + (li===0? Math.max(0,1-Math.abs(x-sunX)/(W*.3))*0 : 0)]); }
+        g = ctx.createLinearGradient(0,base-H*L.amp*1.6,0,H); g.addColorStop(0,L.top); g.addColorStop(.45,L.bot); g.addColorStop(1,L.bot);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(0,H); pts.forEach(([x,y]) => ctx.lineTo(x,y)); ctx.lineTo(W,H); ctx.fill();
+        // rim light on ridge tops facing the sun
+        ctx.save(); ctx.strokeStyle = `rgba(255,${200-li*12},${150-li*10},${.35-li*.05})`; ctx.lineWidth = 1.2; ctx.beginPath(); pts.forEach(([x,y],i) => i ? ctx.lineTo(x,y) : ctx.moveTo(x,y)); ctx.stroke(); ctx.restore();
+        // forest texture on nearer ridges
+        if(li >= 3){ const tr = rng(L.seed*13); ctx.fillStyle = li===5 ? "rgba(10,30,22,.28)" : "rgba(20,45,38,.18)";
+          for(let k=0;k<(li===5?1400:800);k++){ const x = tr()*W, idx = Math.min(pts.length-1, Math.round(x/4)), y0 = pts.at(idx)[1] + tr()*H*.07 + 2, r = (li===5?2:1.4) + tr()*(li===5?2.6:1.6); ctx.beginPath(); ctx.arc(x,y0,r,0,7); ctx.fill(); } }
+        // tea rows on the nearest ridge
+        if(li === 5){ ctx.save(); ctx.strokeStyle = "rgba(120,160,95,.22)"; ctx.lineWidth = 2;
+          for(let k=0;k<14;k++){ ctx.beginPath(); for(let x=0;x<=W;x+=8){ const idx = Math.min(pts.length-1, Math.round(x/4)), y = pts.at(idx)[1] + 14 + k*9 + Math.sin(x/70+k)*3; x ? ctx.lineTo(x,y) : ctx.moveTo(x,y); } ctx.stroke(); } ctx.restore();
+          // shola tree silhouettes along the near crest
+          const sr = rng(91); ctx.fillStyle = "#0F241C";
+          for(let k=0;k<22;k++){ const x = sr()*W, idx = Math.min(pts.length-1, Math.round(x/4)), y = pts.at(idx)[1] + 4, h = 18 + sr()*34, w = h*(.35+sr()*.25);
+            ctx.beginPath(); ctx.ellipse(x, y-h*.6, w, h*.45, 0, 0, 7); ctx.fill(); ctx.fillRect(x-1.5, y-h*.3, 3, h*.35); } }
+        // mist band in front of this ridge
+        if(li < 5){ const my = base + H*.015, mh = H*(.05 + li*.012), mn = noise1(L.seed+40);
+          for(let x=0;x<W;x+=3){ const a = .10 + fbm(mn, x/W*3)*.32;
+            g = ctx.createLinearGradient(0,my-mh,0,my+mh); g.addColorStop(0,"rgba(255,236,220,0)"); g.addColorStop(.5,`rgba(255,${232-li*6},${214-li*8},${a})`); g.addColorStop(1,"rgba(255,236,220,0)");
+            ctx.fillStyle = g; ctx.fillRect(x,my-mh,3.5,mh*2); } }
+      });
+      // film grain for a photographic finish
+      const gr = rng(5), img = ctx.getImageData(0,0,cv.width,cv.height), d = img.data;
+      for(let i=0;i<d.length;i+=4){ const v = (gr()-.5)*14; d[i]+=v; d[i+1]+=v; d[i+2]+=v; }
+      ctx.putImageData(img,0,0);
+    }
+    const photo = document.getElementById("heroPhoto");
+    if(photo && photo.complete && photo.naturalWidth) return;
+    draw();
+    let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(draw, 200); });
+  })();
+
+
+  const state = {type:"all", sort:"rec"};
+  const tabs = document.getElementById("tabs"), track = document.getElementById("track"), sortSel = document.getElementById("sortBy");
+  tabs.innerHTML = TYPES.map(([k,l]) => `<button type="button" data-type="${k}" aria-pressed="${k==='all'}">${l}<span>${k==='all'?TRIPS.length:TRIPS.filter(t=>t.type===k).length}</span></button>`).join("");
+
+  function render(){
+    let list = TRIPS.filter(t => state.type === "all" || t.type === state.type);
+    const last = v => v == null ? Infinity : v;
+    if(state.sort === "price") list.sort((a,b) => last(a.price) - last(b.price));
+    else if(state.sort === "date") list.sort((a,b) => last(a.date && Date.parse(a.date)) - last(b.date && Date.parse(b.date)));
+    else list.sort((a,b) => a.rank - b.rank);
+    track.innerHTML = list.map((t,i) => `
+      <article class="ticket" style="animation-delay:${Math.min(i,4)*70}ms">
+        <div class="ticket-art">${t.svg}<span class="badge">${LABEL[t.type]}</span>${t.date ? "" : `<span class="badge alt">Any dates</span>`}</div>
+        <div class="perf" aria-hidden="true"></div>
+        <div class="ticket-body">
+          <div class="route" aria-hidden="true"><b>${t.from}</b><i></i><span>➝</span><i></i><b>${t.to}</b></div>
+          <h3>${t.name}</h3>
+          <div class="fields">
+            <span>Region<b>${t.region}</b></span>
+            <span>Duration<b>${t.days}</b></span>
+            <span>Next departure<b>${fmtDate(t.date)}</b></span>
+            <span>Starts from<b>${t.from === "YOU" ? "Your city" : "Kochi"}</b></span>
+          </div>
+          <div class="ticket-foot">
+            <div class="price"><small>${t.price ? "From, per person" : "Price"}</small>${t.price ? inr(t.price) : "On request"}</div>
+            <button type="button" data-enquire="${t.name}" data-kind="${LABEL[t.type]}">Enquire</button>
+          </div>
+        </div>
+      </article>`).join("") || `<p class="empty">No trips here yet. Message us and we'll plan one.</p>`;
+    track.scrollLeft = 0;
+    updateUI();
+  }
+  tabs.addEventListener("click", e => {
+    const b = e.target.closest("button[data-type]"); if(!b) return;
+    setType(b.dataset.type); userTouched();
+  });
+  function setType(k){
+    state.type = k;
+    tabs.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.dataset.type === k));
+    render();
+  }
+  sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); userTouched(); });
+
+  /* slider controls */
+  const prev = document.getElementById("prev"), next = document.getElementById("next"), bar = document.getElementById("bar"), play = document.getElementById("play");
+  const step = () => { const c = track.querySelector(".ticket"); return c ? c.getBoundingClientRect().width + 20 : 300; };
+  const maxScroll = () => track.scrollWidth - track.clientWidth;
+  function updateUI(){
+    const m = maxScroll();
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= m - 4;
+    const vis = track.scrollWidth ? track.clientWidth / track.scrollWidth : 1;
+    bar.style.width = Math.max(vis, m > 0 ? vis + (1 - vis) * (track.scrollLeft / m) : 1) * 100 + "%";
+  }
+  track.addEventListener("scroll", () => requestAnimationFrame(updateUI), {passive:true});
+  prev.addEventListener("click", () => { track.scrollBy({left:-step()}); userTouched(); });
+  next.addEventListener("click", () => { track.scrollBy({left:step()}); userTouched(); });
+  track.addEventListener("keydown", e => { if(e.key === "ArrowRight"){ track.scrollBy({left:step()}); e.preventDefault(); } if(e.key === "ArrowLeft"){ track.scrollBy({left:-step()}); e.preventDefault(); } });
+  addEventListener("resize", updateUI);
+
+  /* auto-slide: advances every 4.5s, pauses on hover/focus, stops when the visitor takes over */
+  let auto = !reduce, hovering = false, timer = null;
+  function setPlay(on){
+    auto = on; play.setAttribute("aria-pressed", on);
+    play.querySelector("span").textContent = on ? "Pause" : "Auto-play";
+    play.querySelector("svg").innerHTML = on ? '<rect x="2" y="2" width="3.5" height="10" rx="1" fill="currentColor"/><rect x="8.5" y="2" width="3.5" height="10" rx="1" fill="currentColor"/>' : '<path d="M3 2l9 5-9 5z" fill="currentColor"/>';
+  }
+  function userTouched(){ if(auto) setPlay(false); }
+  play.addEventListener("click", () => setPlay(!auto));
+  const slider = track.parentElement;
+  slider.addEventListener("pointerenter", () => hovering = true);
+  slider.addEventListener("pointerleave", () => hovering = false);
+  track.addEventListener("touchstart", userTouched, {passive:true});
+  timer = setInterval(() => {
+    if(!auto || hovering || document.hidden || track.contains(document.activeElement)) return;
+    const r = track.getBoundingClientRect(); if(r.bottom < 0 || r.top > innerHeight) return;
+    if(track.scrollLeft >= maxScroll() - 4) track.scrollTo({left:0}); else track.scrollBy({left:step()});
+  }, 4500);
+  setPlay(auto);
+
+  /* jump from "ways to travel" cards and footer links to a filtered slider */
+  document.querySelectorAll("[data-jump],[data-jump-link]").forEach(el => el.addEventListener("click", e => {
+    e.preventDefault();
+    setType(el.dataset.jump || el.dataset.jumpLink); userTouched();
+    document.getElementById("trips").scrollIntoView();
+  }));
+
+  /* offsite art */
+  document.getElementById("offsiteArt").innerHTML = art("offsite", 8);
+
+  /* enquiry form */
+  const destSel = document.getElementById("f-dest"), typeSel = document.getElementById("f-type");
+  TRIPS.forEach(t => destSel.insertAdjacentHTML("beforeend", `<option>${t.name}</option>`));
+  destSel.insertAdjacentHTML("beforeend", `<option>Something custom</option>`);
+  track.addEventListener("click", e => {
+    const b = e.target.closest("[data-enquire]"); if(!b) return;
+    destSel.value = b.dataset.enquire; typeSel.value = b.dataset.kind;
+    document.getElementById("contact").scrollIntoView();
+    setTimeout(() => document.getElementById("f-name").focus({preventScroll:true}), 500);
+  });
+  document.querySelectorAll("a[data-type]").forEach(a => a.addEventListener("click", () => { typeSel.value = a.dataset.type; destSel.value = ""; }));
+  document.getElementById("enquiry").addEventListener("submit", e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const err = document.getElementById("f-err");
+    if(!v("f-name") || !v("f-phone")){ err.hidden = false; return; }
+    err.hidden = true;
+    const msg = ["Hi Romify! I'd like to plan a trip.", `Name: ${v("f-name")}`, `Phone: ${v("f-phone")}`, `Trip type: ${v("f-type")}`,
+      `Trip: ${v("f-dest") || "Not sure yet"}`, `When: ${v("f-when") || "Flexible"}`, `Travellers: ${v("f-size") || "-"}`,
+      v("f-msg") ? `Notes: ${v("f-msg")}` : ""].filter(Boolean).join("\n");
+    document.getElementById("f-text").textContent = msg;
+    document.getElementById("f-wa").href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    document.getElementById("f-out").hidden = false;
+  });
+
+  /* copy buttons */
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => {
+    const fallback = () => { const s = b.previousElementSibling.querySelector("strong"); const rg = document.createRange(); rg.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); b.textContent = "Selected"; };
+    try { navigator.clipboard.writeText(b.dataset.copy).then(() => { b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1600); }, fallback); } catch(_) { fallback(); }
+  }));
+
+  /* mobile menu */
+  const mb = document.getElementById("menuBtn"), nav = document.getElementById("nav");
+  mb.addEventListener("click", () => { const o = !nav.classList.contains("open"); nav.classList.toggle("open", o); mb.setAttribute("aria-expanded", o); });
+  nav.addEventListener("click", e => { if(e.target.closest("a")){ nav.classList.remove("open"); mb.setAttribute("aria-expanded", false); } });
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  render();
+})();
+</script>
+
+</body>
+</html>
